@@ -50,24 +50,24 @@ public class BidDaoTest {
 
         assertTrue(givenBid.getId() > 0);
 
-        Optional<Bid> storedBid = bidDao.findBidById(givenBid.getId());
+        Bid storedBid = bidDao.findBidById(givenBid.getId());
 
-        assertTrue(storedBid.isPresent());
-        assertEquals(givenBid, storedBid.get());
+        assertNotNull(storedBid);
+        assertEquals(givenBid, storedBid);
 
-        storedBid.get().setBidStatus(BidStatus.REJECTED);
+        storedBid.setBidStatus(BidStatus.REJECTED);
 
-        bidDao.save(storedBid.get());
+        bidDao.save(storedBid);
 
-        Optional<Bid> updatedStoredBid = bidDao.findBidById(givenBid.getId());
+        Bid updatedStoredBid = bidDao.findBidById(givenBid.getId());
 
-        assertTrue(updatedStoredBid.isPresent());
-        assertEquals(updatedStoredBid.get(), storedBid.get());
+        assertNotNull(updatedStoredBid);
+        assertEquals(updatedStoredBid, storedBid);
 
         bidDao.deleteById(givenBid.getId());
 
-        Optional<Bid> deletedBid = bidDao.findBidById(givenBid.getId());
+        Bid deletedBid = bidDao.findBidById(givenBid.getId());
 
-        assertFalse(deletedBid.isPresent());
+        assertNull(deletedBid);
     }
 }

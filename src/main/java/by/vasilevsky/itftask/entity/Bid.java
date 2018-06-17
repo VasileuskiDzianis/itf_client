@@ -1,9 +1,15 @@
 package by.vasilevsky.itftask.entity;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonInclude;
+
 import javax.persistence.*;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 
+@JsonIgnoreProperties(ignoreUnknown = true)
+@JsonInclude(JsonInclude.Include.NON_NULL)
 @Entity
 @Table(name = "bids")
 public class Bid {
@@ -18,6 +24,7 @@ public class Bid {
     @Column(name = "bid")
     private BigDecimal bid;
 
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
     @Column(name = "due_date")
     private LocalDate dueDate;
 

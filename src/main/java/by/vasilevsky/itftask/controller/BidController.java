@@ -8,7 +8,6 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping("/api/v1/bids")
 public class BidController {
-
     private BidService bidService;
 
     @Autowired
